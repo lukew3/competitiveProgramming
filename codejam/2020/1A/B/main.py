@@ -1,52 +1,38 @@
 def calcPath(n):
     path = []
-    if n<=6:
+    if n<=5:
         for i in range(1, n+1):
             path.append([i,i])
-    elif n <= 501 and n>6:
-        count=n
-        path = [[1,1],[2,2],[2,1],[3,2],[3,3]]
-        count-=6
-        for i in range(count):
-            path.append([4+i, 4+i])
-    elif n <= 10000:
-        path = [[1,1]]
-        sum = 1
-        row = 2
-        while sum < n:
-            sum += (row-1)
-            if sum <= n:
-                path.append([row, 2])
-                row+=1
-        if sum != n:
-            sum-= (row-1)
-        if sum<n:
-            row-=1
-            for j in range(n-sum):
-                path.append([row, 1])
-                row+=1
-    """
     else:
         path = [[1,1],[2,2],[3,3]]
-        sum = 3
-        row = 3
-        last = 1
-        while (sum+(row-1)) < n:
-            currentVal = last + row-1
-            sum+= currentVal
-            last = currentVal
-            if (sum+(row-1)) <= n:
-                path.append([row, 3])
-                row+=1
-            if sum != n:
-                sum -= last
-            if sum < n:
-                path.append([row, 2])
-                row-=1
-                for j in rang(n-sum):
-                    path.append([row, 1])
-                    row+=1
-    """
+        row=3
+        sum=3
+        lastVal = 1
+        print("val: " + str(sum))
+        while sum+(lastVal+row-2)+(row) < n:
+            row+=1
+            currentVal = lastVal+row-2
+            sum+=currentVal
+            print("val: " + str(currentVal))
+            print("sum: " + str(sum))
+            path.append([row, 3])
+            lastVal = currentVal
+        #print(row)
+        #print(sum)
+        while sum+(row-1) < n:
+            row+=1
+            currentVal = row-2
+            sum+=currentVal
+            print("val: " + str(currentVal))
+            print("sum: " + str(sum))
+            path.append([row-1, 2])
+        while sum < n:
+            row+=1
+            sum+=1
+            print("val: " + str(1))
+            print("sum: " + str(sum))
+            path.append([row-2, 1])
+        print(sum)
     return path
 
 def printPath(path, case):
